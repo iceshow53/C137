@@ -42,3 +42,10 @@ The following packages were 추가됨:
   com.unity.test-framework@1.1.31
 The following packages were 업데이트됨:
   com.unity.collab-proxy 1.13.5 버전에서 2.0.0버전으로  com.unity.timeline 1.6.2 버전에서 1.6.4버전으로  com.unity.visualscripting 1.7.6 버전에서 1.8.0버전으로
+=== Mon Mar  6 13:46:31 2023
+
+Packages were changed.
+Update Mode: updateDependencies
+
+The following packages were updated:
+  com.unity.collab-proxy from version 2.0.0 to 2.0.1
