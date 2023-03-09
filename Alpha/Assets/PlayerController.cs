@@ -32,7 +32,12 @@ public class PlayerController : MonoBehaviour
 
 	// ** 복사할 총알 원본
 	public GameObject BulletPrefab;
-	
+
+	// ** 복사할 FX 원본
+	public GameObject fxPrefab;
+
+	public GameObject[] stageBack = new GameObject[7];
+
 	// ** 복제된 총알의 저장공간
 	private List<GameObject> Bullets = new List<GameObject>();
 
@@ -61,6 +66,9 @@ public class PlayerController : MonoBehaviour
 		onStatus = false;
 
 		Direction = 1.0f;
+
+		for (int i = 0; i < 7; i++)
+			stageBack[i] = GameObject.Find(i.ToString());
 	}
 
 	// 매 프레임마다 업데이트되는 함수
@@ -130,7 +138,8 @@ public class PlayerController : MonoBehaviour
             }
 			
 			// ** 입력받은 값으로 플레이어를 움직인다.
-			transform.position += new Vector3(Hor * Time.deltaTime * Speed, Ver * Time.deltaTime * Speed, 0.0f);
+			//transform.position += new Vector3(Hor * Time.deltaTime * Speed, Ver * Time.deltaTime * Speed, 0.0f);
+			//Camera.main.transform.position = new Vector3(transform.position.x, transform.position.y, -10.0f);
 
 		}
 	}
@@ -153,6 +162,9 @@ public class PlayerController : MonoBehaviour
 		
 		// ** 총알 스크립트 내부의 방향 변수를 현재 플레이어의 방향 변수로 설정한다.
 		controller.Direction = new Vector3(Direction, 0.0f, 0.0f);
+
+		// ** 총알 스크립트 내부에
+		controller.fxPrefab = fxPrefab;
 
 		// ** 모든 설정이 종료되었다면 저장소에 보관한다.
 		Bullets.Add(Obj);
