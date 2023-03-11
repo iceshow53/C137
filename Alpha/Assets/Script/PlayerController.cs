@@ -46,17 +46,17 @@ public class PlayerController : MonoBehaviour
 	private List<GameObject> Bullets = new List<GameObject>();
 
 	// ** 웬만하면 컴포넌트는 Awake에서 권장.
-    private void Awake()
-    {
+	private void Awake()
+	{
 		// this << 생략가능.
 		// ** player 의 Animator를 받아온다.
 		animator = this.GetComponent<Animator>();
 		spriteRenderer = this.GetComponent<SpriteRenderer>();
 	}
 
-    // ** 유니티 기본 제공 함수
-    // 첫 번째 프레임이 업데이트되기 전 시작되는 함수
-    void Start()
+	// ** 유니티 기본 제공 함수
+	// 첫 번째 프레임이 업데이트되기 전 시작되는 함수
+	void Start()
 	{
 		// ** 속도를 초기화
 		Speed = 5.0f;
@@ -88,10 +88,10 @@ public class PlayerController : MonoBehaviour
 		if (Hor != 0)
 			Direction = Hor;
 		else
-        {
+		{
 			DirLeft = false;
 			DirRight = false;
-        }
+		}
 
 		// ** 죽어있지 않으면 실행
 		if (!died)
@@ -138,16 +138,16 @@ public class PlayerController : MonoBehaviour
 
 			// ** 플레이어가 바라보고 있는 방향에 따라 이미지 반전 설정
 			if(Direction < 0)
-            {
+			{
 				spriteRenderer.flipX = DirLeft = true;
 				// ** 입력받은 값으로 플레이어를 움직인다.
 				transform.position += new Vector3(Hor * Time.deltaTime * Speed, Ver * Time.deltaTime * Speed, 0.0f);
 			}
 			else if(Direction > 0)
-            {
+			{
 				DirRight = true;
 				spriteRenderer.flipX = false;
-            }
+			}
 			
 			// ** 입력받은 값으로 플레이어를 움직인다.
 			//transform.position += new Vector3(Hor * Time.deltaTime * Speed, Ver * Time.deltaTime * Speed, 0.0f);
