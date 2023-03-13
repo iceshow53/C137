@@ -31,14 +31,10 @@ public class PlayerController : MonoBehaviour
 	// ** 플레이어가 마지막으로 바라본 방향
 	private float Direction;
 
-	public bool DirLeft;
-	public bool DirRight;
-
 	// ** 복사할 총알 원본
-	public GameObject BulletPrefab;
-
+	private GameObject BulletPrefab;
 	// ** 복사할 FX 원본
-	public GameObject fxPrefab;
+	private GameObject fxPrefab;
 
 	//public GameObject[] stageBack = new GameObject[7];
 
@@ -52,6 +48,10 @@ public class PlayerController : MonoBehaviour
 		// ** player 의 Animator를 받아온다.
 		animator = this.GetComponent<Animator>();
 		spriteRenderer = this.GetComponent<SpriteRenderer>();
+
+		// ** [Resources] 폴더에서 사용할 리소스를 들고온다.
+		BulletPrefab = Resources.Load("Prefabs/Bullet") as GameObject;
+		fxPrefab = Resources.Load("Prefabs/FX/Smoke") as GameObject;
 	}
 
 	// ** 유니티 기본 제공 함수
@@ -84,14 +84,44 @@ public class PlayerController : MonoBehaviour
 		Hor = Input.GetAxisRaw("Horizontal");
 		Ver = 0.0f ;
 
+		movement = new Vector3(Hor * Time.deltaTime * Speed, Ver * Time.deltaTime * Speed, 0.0f);
+
 		// ** Hor이 0이라면 멈춰있는 상태이므로 예외처리를 해준다.
 		if (Hor != 0)
 			Direction = Hor;
-		else
+
+		if(Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D))
 		{
-			DirLeft = false;
-			DirRight = false;
+			if (transform.position.x < 0)
+			{
+				transform.position += movement;
+				spriteRenderer.flipX = false;
+			}
+			else
+			{
+				ControllerManager.GetInstance().DirRight = true;
+				ControllerManager.GetInstance().DirLeft = false;
+				spriteRenderer.flipX = false;
+			}
 		}
+		if(Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A))
+		{ 
+			ControllerManager.GetInstance().DirRight = false;
+			ControllerManager.GetInstance().DirLeft = true;
+			spriteRenderer.flipX = true;
+			if (transform.position.x > -10)
+			{
+				// ** 입력받은 값으로 플레이어를 움직인다.
+				transform.position += movement;
+			}
+		}		
+		if(Input.GetKeyUp(KeyCode.RightArrow) || Input.GetKeyUp(KeyCode.LeftArrow) || Input.GetKeyUp(KeyCode.D) || Input.GetKeyUp(KeyCode.A))
+		{
+			ControllerManager.GetInstance().DirRight = false;
+			ControllerManager.GetInstance().DirLeft = false;
+		}
+
+
 
 		// ** 죽어있지 않으면 실행
 		if (!died)
@@ -136,18 +166,18 @@ public class PlayerController : MonoBehaviour
 			// ** 플레이어의 움직임에 따라 이동 모션을 실행한다.
 			animator.SetFloat("Speed", Hor);
 
-			// ** 플레이어가 바라보고 있는 방향에 따라 이미지 반전 설정
-			if(Direction < 0)
-			{
-				spriteRenderer.flipX = DirLeft = true;
-				// ** 입력받은 값으로 플레이어를 움직인다.
-				transform.position += new Vector3(Hor * Time.deltaTime * Speed, Ver * Time.deltaTime * Speed, 0.0f);
-			}
-			else if(Direction > 0)
-			{
-				DirRight = true;
-				spriteRenderer.flipX = false;
-			}
+			//// ** 플레이어가 바라보고 있는 방향에 따라 이미지 반전 설정
+			//if(Direction < 0)
+			//{
+				//spriteRenderer.flipX = DirLeft = true;
+				//// ** 입력받은 값으로 플레이어를 움직인다.
+				//transform.position += new Vector3(Hor * Time.deltaTime * Speed, Ver * Time.deltaTime * Speed, 0.0f);
+			//}
+			//else if(Direction > 0)
+			//{
+				//DirRight = true;
+				//spriteRenderer.flipX = false;
+			//}
 			
 			// ** 입력받은 값으로 플레이어를 움직인다.
 			//transform.position += new Vector3(Hor * Time.deltaTime * Speed, Ver * Time.deltaTime * Speed, 0.0f);

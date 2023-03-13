@@ -60,23 +60,36 @@ public class BackGroundController : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
-		// ** 플레이어가 바라보고 있는 방향에 따라 분기됨.
-		if(playerRenderer.flipX) // ** 우측 이동
-        {
+		// ** 이동정보 설정
+		movement = new Vector3(((Input.GetAxisRaw("Horizontal") + offset.x) * Time.deltaTime * Speed * 2.5f), 0.0f, 0.0f); // ** 최적화 요망
 
-        }
-		else // ** 좌측 이동
+        //// ** 플레이어가 바라보고 있는 방향에 따라 분기됨.
+        //if (playerRenderer.flipX) // ** 우측 이동
+        //{
+
+        //}
+        //else // ** 좌측 이동
+        //{
+        //    // ** 이동정보 설정
+        //    movement = new Vector3(((Input.GetAxisRaw("Horizontal") + offset.x) * Time.deltaTime * Speed * 2.5f), 0.0f, 0.0f);
+        //    // ** 이동정보 적용
+        //    transform.position -= movement;
+        //    endPoint -= movement.x;
+        //}
+        if (ControllerManager.GetInstance().DirLeft)
         {
-			// ** 이동정보 설정
-			movement = new Vector3(((Input.GetAxisRaw("Horizontal") + offset.x) * Time.deltaTime * Speed * 2.5f), 0.0f, 0.0f);
-			// ** 이동정보 적용
+            
+        }
+
+        if (ControllerManager.GetInstance().DirRight)
+		{
 			transform.position -= movement;
-			endPoint -= movement.x;
-		}
-		
+			endPoint -= movement.x;             
+        }
+
 
 		// ** 동일한 이미지 복사
-		if(player.transform.position.x + (sprite.bounds.size.x * 0.5f) > endPoint)
+		if (player.transform.position.x + (sprite.bounds.size.x * 0.5f) > endPoint)
 		{
 			// ** 이미지를 복제한다.
 			GameObject Obj = Instantiate(this.gameObject);
