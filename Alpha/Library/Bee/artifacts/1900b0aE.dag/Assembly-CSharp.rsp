@@ -370,8 +370,10 @@
 "Assets/Script/BulletController.cs"
 "Assets/Script/CameraController.cs"
 "Assets/Script/ControllerManager.cs"
+"Assets/Script/EnemyManager.cs"
 "Assets/Script/MyGizmo.cs"
 "Assets/Script/PlayerController.cs"
+"Assets/Simple 2D Platformer BE2/ReadMe/Scripts/ReadmeBE2.cs"
 -langversion:9.0
 
 /deterministic

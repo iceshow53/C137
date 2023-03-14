@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
+
 public class PlayerController : MonoBehaviour
 {
+
 	// ** 움직이는 속도
 	private float Speed;
 
@@ -36,7 +38,14 @@ public class PlayerController : MonoBehaviour
 	// ** 복사할 FX 원본
 	private GameObject fxPrefab;
 
+	// ** 추후에 리스트로 변경
 	//public GameObject[] stageBack = new GameObject[7];
+
+	/*
+	Dictionary<string,GameObject>
+	 
+	 
+	 */
 
 	// ** 복제된 총알의 저장공간
 	private List<GameObject> Bullets = new List<GameObject>();
@@ -58,6 +67,7 @@ public class PlayerController : MonoBehaviour
 	// 첫 번째 프레임이 업데이트되기 전 시작되는 함수
 	void Start()
 	{
+
 		// ** 속도를 초기화
 		Speed = 5.0f;
 
@@ -82,9 +92,9 @@ public class PlayerController : MonoBehaviour
 		// ** Input.GetAxis = -1 ~ 1 사이의 값을 반환함.
 		// Input.GetAxisRaw = -1 또는 0 또는 1 중 하나를 반환함.
 		Hor = Input.GetAxisRaw("Horizontal");
-		Ver = 0.0f ;
+		Ver = Input.GetAxisRaw("Vertical");
 
-		movement = new Vector3(Hor * Time.deltaTime * Speed, Ver * Time.deltaTime * Speed, 0.0f);
+		movement = new Vector3(Hor * Time.deltaTime * Speed, Ver * Time.deltaTime * Speed * 0.5f, 0.0f);
 
 		// ** Hor이 0이라면 멈춰있는 상태이므로 예외처리를 해준다.
 		if (Hor != 0)
@@ -94,7 +104,7 @@ public class PlayerController : MonoBehaviour
 		{
 			if (transform.position.x < 0)
 			{
-				transform.position += movement;
+				transform.position += new Vector3(movement.x, 0.0f, 0.0f);
 				spriteRenderer.flipX = false;
 			}
 			else
@@ -112,7 +122,7 @@ public class PlayerController : MonoBehaviour
 			if (transform.position.x > -10)
 			{
 				// ** 입력받은 값으로 플레이어를 움직인다.
-				transform.position += movement;
+				transform.position += new Vector3(movement.x, 0.0f, 0.0f);
 			}
 		}		
 		if(Input.GetKeyUp(KeyCode.RightArrow) || Input.GetKeyUp(KeyCode.LeftArrow) || Input.GetKeyUp(KeyCode.D) || Input.GetKeyUp(KeyCode.A))
@@ -121,6 +131,7 @@ public class PlayerController : MonoBehaviour
 			ControllerManager.GetInstance().DirLeft = false;
 		}
 
+		transform.position += new Vector3(0.0f, movement.y, 0.0f);
 
 
 		// ** 죽어있지 않으면 실행
@@ -275,4 +286,9 @@ public class PlayerController : MonoBehaviour
 		// ** 함수는 애니메이션 클립의 이벤트 프레임으로 삽입됨.
 		onRoll = false;
 	}
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+		print("coll");
+    }
 }
