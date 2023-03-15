@@ -50,9 +50,9 @@ public class BulletController : MonoBehaviour
 	{
 		// ** "Wall"이라는 태그를 가진 대상과 충돌하거나 HP가 0이 되면 총알 삭제
 		if (collision.tag == "Wall" || HP == 0)
-			Destroy(this.gameObject);
-		else
-        {
+			Destroy(this.gameObject, 0.016f);
+		else if (collision.tag == "Enemy")
+		{
 			// ** 충돌횟수 차감.
 			--HP;
 
@@ -69,8 +69,6 @@ public class BulletController : MonoBehaviour
 			Obj.transform.position = transform.position;
 
 			// ** collision = 충돌한 대상.
-			// ** 충돌한 물체 제거
-			Destroy(collision.gameObject);
 		}
 	}
 	/*

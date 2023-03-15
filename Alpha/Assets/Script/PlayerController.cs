@@ -42,10 +42,9 @@ public class PlayerController : MonoBehaviour
 	//public GameObject[] stageBack = new GameObject[7];
 
 	/*
-	Dictionary<string,GameObject>
-	 
-	 
+	Dictionary<string,GameObject>	 
 	 */
+	[Header("방향")]
 
 	// ** 복제된 총알의 저장공간
 	private List<GameObject> Bullets = new List<GameObject>();
@@ -60,7 +59,8 @@ public class PlayerController : MonoBehaviour
 
 		// ** [Resources] 폴더에서 사용할 리소스를 들고온다.
 		BulletPrefab = Resources.Load("Prefabs/Bullet") as GameObject;
-		fxPrefab = Resources.Load("Prefabs/FX/Smoke") as GameObject;
+		//fxPrefab = Resources.Load("Prefabs/FX/Smoke") as GameObject;
+		fxPrefab = Resources.Load("Prefabs/FX/Hit") as GameObject;
 	}
 
 	// ** 유니티 기본 제공 함수
