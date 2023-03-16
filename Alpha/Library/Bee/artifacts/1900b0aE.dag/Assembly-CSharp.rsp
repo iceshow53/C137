@@ -370,10 +370,12 @@
 "Assets/Script/BulletController.cs"
 "Assets/Script/CameraController.cs"
 "Assets/Script/ControllerManager.cs"
+"Assets/Script/EnemyBullet.cs"
 "Assets/Script/EnemyController.cs"
 "Assets/Script/EnemyManager.cs"
 "Assets/Script/MyGizmo.cs"
 "Assets/Script/PlayerController.cs"
+"Assets/Script/Test.cs"
 "Assets/Simple 2D Platformer BE2/ReadMe/Scripts/ReadmeBE2.cs"
 -langversion:9.0
 

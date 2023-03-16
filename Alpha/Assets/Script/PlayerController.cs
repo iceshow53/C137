@@ -289,6 +289,6 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-		print("coll");
+		print(collision.name);
     }
 }

@@ -19,9 +19,8 @@ public class EnemyManager : MonoBehaviour
 
 	// ** Enemy의 부모 객체
 	private GameObject Parent;
-
 	// ** Enemy 객체
-	private GameObject Prefab;
+	private GameObject Prefab,Bullet;
 	private void Awake()
 	{
 		if (Instance == null)
@@ -36,6 +35,7 @@ public class EnemyManager : MonoBehaviour
 
 			// ** Enemy로 사용할 원형 객체
 			Prefab = Resources.Load("Prefabs/Enemy") as GameObject;
+			Bullet = Resources.Load("Prefabs/EnemyBullet") as GameObject;
 		}
 	}
 	
@@ -47,8 +47,11 @@ public class EnemyManager : MonoBehaviour
 			// ** Enemy 원형객체를 복제한다.
 			GameObject Obj = Instantiate(Prefab);
 
+			Obj.GetComponent<EnemyController>().bullet = Bullet;
+
 			// ** 클론의 위치를 초기화
 			Obj.transform.position = new Vector3(18.0f, Random.Range(-8.2f, -5.2f), 0.0f);
+			
 
 			// ** 클론의 이름 초기화
 			Obj.transform.name = "TEST";
