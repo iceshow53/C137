@@ -5,9 +5,10 @@ using UnityEngine.UI;
 
 public class SkillController : MonoBehaviour
 {
-	public List<GameObject> images = new List<GameObject>();
-	public List<GameObject> Buttons = new List<GameObject>();
-	public List<Image> ButtonImages = new List<Image>();
+	private List<GameObject> images = new List<GameObject>();
+	private List<GameObject> Buttons = new List<GameObject>();
+	private List<Image> ButtonImages = new List<Image>();
+	private float[] cooltime = new float[5];
 
     private void Start()
     {
@@ -19,43 +20,21 @@ public class SkillController : MonoBehaviour
 			Buttons.Add(Obj.transform.GetChild(0).gameObject);
 			ButtonImages.Add(Obj.transform.GetChild(0).GetComponent<Image>());
 		}
+		cooltime[0] = 1.0f;
+		cooltime[1] = 0.5f;
+		cooltime[2] = 0.1f;
+		cooltime[3] = 0.1f;
+		cooltime[4] = 0.1f;
+
 	}
 
-
-	public void skill1()
-	{
-		ButtonImages[0].fillAmount = 0;
-		Buttons[0].GetComponent<Button>().enabled = false;
-		StartCoroutine(PushButton_Coroutine(0, 0.5f));
+	public void skill(int i)
+    {
+		ButtonImages[i].fillAmount = 0;
+		Buttons[i].GetComponent<Button>().enabled = false;
+		StartCoroutine(PushButton_Coroutine(i, cooltime[i]));
 	}
 
-	public void skill2()
-	{
-		ButtonImages[1].fillAmount = 0;
-		Buttons[1].GetComponent<Button>().enabled = false;
-		StartCoroutine(PushButton_Coroutine(1, 0.1f));
-	}
-
-	public void skill3()
-	{
-		ButtonImages[2].fillAmount = 0;
-		Buttons[2].GetComponent<Button>().enabled = false;
-		StartCoroutine(PushButton_Coroutine(2, 0.1f));
-	}
-
-	public void skill4()
-	{
-		ButtonImages[3].fillAmount = 0;
-		Buttons[3].GetComponent<Button>().enabled = false;
-		StartCoroutine(PushButton_Coroutine(3, 0.5f));
-	}
-
-	public void skill5()
-	{
-		ButtonImages[4].fillAmount = 0;
-		Buttons[4].GetComponent<Button>().enabled = false;
-		StartCoroutine(PushButton_Coroutine(4, 0.5f));
-	}
 
 	IEnumerator PushButton_Coroutine(int _index, float cooldown)
     {
