@@ -67,10 +67,6 @@ public class PlayerController : MonoBehaviour
 	// 첫 번째 프레임이 업데이트되기 전 시작되는 함수
 	void Start()
 	{
-
-		// ** 속도를 초기화
-		Speed = 5.0f;
-
 		a = 0;
 		onAttack = false;
 		onHit = false;
@@ -94,7 +90,10 @@ public class PlayerController : MonoBehaviour
 		Hor = Input.GetAxisRaw("Horizontal");
 		Ver = Input.GetAxisRaw("Vertical");
 
+		Speed = ControllerManager.GetInstance().CharacterSpeed;
+
 		movement = new Vector3(Hor * Time.deltaTime * Speed, Ver * Time.deltaTime * Speed * 0.5f, 0.0f);
+
 
 		// ** Hor이 0이라면 멈춰있는 상태이므로 예외처리를 해준다.
 		if (Hor != 0)

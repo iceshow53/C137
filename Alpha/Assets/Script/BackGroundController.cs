@@ -61,7 +61,7 @@ public class BackGroundController : MonoBehaviour
 	void Update()
 	{
 		// ** 이동정보 설정
-		movement = new Vector3(((Input.GetAxisRaw("Horizontal") + offset.x) * Time.deltaTime * Speed), 0.0f, 0.0f); // ** 최적화 요망
+		movement = new Vector3(((Input.GetAxisRaw("Horizontal") + offset.x) * Time.deltaTime * Speed * ControllerManager.GetInstance().CharacterSpeed), 0.0f, 0.0f); // ** 최적화 요망
 
         //// ** 플레이어가 바라보고 있는 방향에 따라 분기됨.
         //if (playerRenderer.flipX) // ** 우측 이동

@@ -32,7 +32,7 @@ public class BulletController : MonoBehaviour
 	private void Start()
 	{
 		// ** 속도 초기값
-		Speed = 10.0f;
+		Speed = ControllerManager.GetInstance().BulletSpeed;
 		spriteRenderer = this.GetComponent<SpriteRenderer>();
 	}
 

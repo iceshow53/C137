@@ -24,7 +24,7 @@ public class EnemyController : MonoBehaviour
 	// Start is called before the first frame update
 	void Start()
 	{
-		Speed = 0.8f;
+		Speed = 2f;
 		movement = new Vector3(1.0f, 0.0f, 0.0f);
 		HP = 3;
 		is_move = 0;
@@ -43,7 +43,7 @@ public class EnemyController : MonoBehaviour
 		//	movement = new Vector3(1.0f, 0.0f, 0.0f);
   //      }
 
-		movement = ControllerManager.GetInstance().DirRight ? new Vector3(Speed + 3.0f, 0.0f, 0.0f) : new Vector3(Speed + 1.0f, 0.0f, 0.0f);
+		movement = ControllerManager.GetInstance().DirRight ? new Vector3(ControllerManager.GetInstance().CharacterSpeed, 0.0f, 0.0f) : new Vector3(Speed, 0.0f, 0.0f);
 
 		if (is_move == 0)
 		{
@@ -52,8 +52,8 @@ public class EnemyController : MonoBehaviour
 		}
 		else if(is_move > 0)
         {
-			movement = ControllerManager.GetInstance().DirRight ? new Vector3(1.4f, 0.0f, 0.0f) : new Vector3(0.0f, 0.0f, 0.0f);
-			transform.position -= movement * Time.deltaTime * Speed;
+			movement = ControllerManager.GetInstance().DirRight ? new Vector3(1f, 0.0f, 0.0f) : new Vector3(0.0f, 0.0f, 0.0f);
+			transform.position -= movement * Time.deltaTime * ControllerManager.GetInstance().CharacterSpeed;
 		}
 
 		distance = Vector3.Distance(player.transform.position, transform.position);
