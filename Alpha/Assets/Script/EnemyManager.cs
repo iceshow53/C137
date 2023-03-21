@@ -20,7 +20,7 @@ public class EnemyManager : MonoBehaviour
 	// ** Enemy의 부모 객체
 	private GameObject Parent;
 	// ** Enemy 객체
-	private GameObject Prefab,Bullet;
+	private GameObject Prefab, Bullet, HPPrefab;
 	private void Awake()
 	{
 		if (Instance == null)
@@ -36,6 +36,7 @@ public class EnemyManager : MonoBehaviour
 			// ** Enemy로 사용할 원형 객체
 			Prefab = Resources.Load("Prefabs/Enemy") as GameObject;
 			Bullet = Resources.Load("Prefabs/EnemyBullet") as GameObject;
+			HPPrefab = Resources.Load("Prefabs/EnemyHP") as GameObject;
 		}
 	}
 	
@@ -46,6 +47,12 @@ public class EnemyManager : MonoBehaviour
 		{
 			// ** Enemy 원형객체를 복제한다.
 			GameObject Obj = Instantiate(Prefab);
+
+			// ** Enemy HP UI 복제
+			GameObject Bar = Instantiate(HPPrefab);
+
+			// ** 복제된 UI를 캔버스에 위치시킨다.
+			Bar.transform.SetParent(GameObject.Find("EnemyHPCanvas").transform);
 
 			Obj.GetComponent<EnemyController>().bullet = Bullet;
 
@@ -58,6 +65,12 @@ public class EnemyManager : MonoBehaviour
 
 			// ** 클론의 계층구조 설정.
 			Obj.transform.parent = Parent.transform;
+
+			// ** UI 객체가 들고있는 스크립트에 접근
+			EnemyHPbar enemyHPbar = Bar.GetComponent<EnemyHPbar>();
+
+			// ** 스크립트의 Target 을 지금 생성된 Enemy로 셋팅.
+			enemyHPbar.Target = Obj;
 
 			// ** 1.5초 휴식
 			yield return new WaitForSeconds(1.5f);

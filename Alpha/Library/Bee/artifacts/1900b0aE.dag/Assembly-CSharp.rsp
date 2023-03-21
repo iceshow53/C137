@@ -379,6 +379,8 @@
 "Assets/Script/PlayerController.cs"
 "Assets/Script/SkillController.cs"
 "Assets/Script/Test.cs"
+"Assets/Script/UI/EnemyHPbar.cs"
+"Assets/Script/UI/PlayerHPbar.cs"
 "Assets/Script/UI/SidebarController.cs"
 -langversion:9.0
 
