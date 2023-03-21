@@ -24,7 +24,7 @@ public class EnemyController : MonoBehaviour
 	// Start is called before the first frame update
 	void Start()
 	{
-		Speed = 2f;
+		Speed = 1f;
 		movement = new Vector3(1.0f, 0.0f, 0.0f);
 		HP = 3;
 		is_move = 0;
