@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+using UnityEngine.SceneManagement;
+
 public class SidebarController : MonoBehaviour
 {
 	public GameObject sidebar;
@@ -25,4 +27,9 @@ public class SidebarController : MonoBehaviour
 		Anim.SetBool("Move", check);
 		print(check);
 	}
+
+	public void MainMenu(string t)
+    {
+		SceneManager.LoadScene(t);
+    }
 }
