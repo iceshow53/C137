@@ -53,6 +53,7 @@ public class BulletController : MonoBehaviour
 			Destroy(this.gameObject, 0.016f);
 		else if (collision.tag == "Enemy")
 		{
+
 			// ** 충돌횟수 차감.
 			--HP;
 
