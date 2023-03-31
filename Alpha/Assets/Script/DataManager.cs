@@ -66,4 +66,6 @@ public class DataManager : MonoBehaviour
 		fileStream.Write(data, 0, data.Length);
 		fileStream.Close(); // ** 항상 볼일이 끝나면 닫아주어야 함.(리소스 차지)
 	}
+
+
 }
